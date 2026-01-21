@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>銀行代碼查詢系統</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: "Segoe UI", "Microsoft JhengHei", sans-serif;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .table-container {
+            width: 100%;
+            max-width: 800px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            color: #76b900;
+            letter-spacing: 5px;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        th {
+            background-color: #111;
+            color: #76b900;
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid #76b900;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #222;
+            color: #ccc;
+        }
+
+        tr:hover td {
+            color: #fff;
+            background-color: rgba(118, 185, 0, 0.05);
+            transition: 0.3s;
+        }
+
+        .idx-col {
+            color: #76b900;
+            font-weight: bold;
+            width: 60px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #76b900;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="table-container">
+        <h2>Bank Code System</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>代碼 (Code)</th>
+                    <th>銀行名稱 (Name)</th>
+                </tr>
+            </thead>
+            <tbody id="row">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "https://raw.githubusercontent.com/wsmwason/taiwan-bank-code/master/data/taiwanBankCodeATM.json",
+                type: "get",
+                dataType: "json",
+                success: function(info) {
+                    let total_len = info.length;
+                    for(let i = 0; i < total_len; i++){
+                        $("#row").append(
+                            "<tr>"+
+                            "<td class='idx-col'>"+(i+1)+"</td>"+
+                            "<td>"+info[i].code+"</td>"+
+                            "<td>"+info[i].name+"</td>"+
+                            "</tr>"
+                        );
+                    }
+                },
+                error: function() {
+                    console.log("error");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
