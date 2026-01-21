@@ -1,8 +1,7 @@
 <html>
 
 <head>
-
-    <title>台南市議員資訊系統</title>
+    <title>農村再生計畫核定案件清冊</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
         body {
@@ -90,43 +89,34 @@
 </head>
 
 <body>
+
     <div class="table-container">
-        <h2>Tainan City Council</h2>
+        <h2>Rural Renewal Records</h2>
         <table>
             <thead>
                 <tr>
-                    <th>職稱</th>
-                    <th>黨籍</th>
-                    <th>姓名</th>
-                    <th>選區</th>
-                    <th>服務處地址</th>
-                    <th>電話</th>
-                    <th>傳真</th>
+                    <th>廠商名稱</th>
+                    <th>聯絡電話</th>
+                    <th>營業內容</th>
                 </tr>
             </thead>
             <tbody id="row"></tbody>
         </table>
     </div>
-
     <script>
         $(document).ready(function() {
             $.ajax({
-                url: "https://raw.githubusercontent.com/mineyatom/debug/refs/heads/main/tainan.json",
+                url: "https://raw.githubusercontent.com/mineyatom/debug/refs/heads/main/agrit1.json",
                 type: "get",
                 dataType: "json",
                 success: function(info) {
                     let total_len = info.length;
                     for (let i = 0; i < total_len; i++) {
-
                         $("#row").append(
                             "<tr>" +
-                            "<td>" + info[i].職稱 + "</td>" +
-                            "<td>" + info[i].黨籍 + "</td>" +
-                            "<td>" + info[i].姓名 + "</td>" +
-                            "<td>" + info[i].區別 + "</td>" +
-                            "<td>" + info[i].服務處地址 + "</td>" +
-                            "<td>" + info[i].服務處電話 + "</td>" +
-                            "<td>" + info[i].傳真電話 + "</td>" +
+                            "<td>" + info[i].廠商名稱 + "</td>" +
+                            "<td>" + info[i].聯絡電話 + "</td>" +
+                            "<td>" + info[i].營業內容 + "</td>" +
                             "</tr>"
                         );
                     }

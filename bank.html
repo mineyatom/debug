@@ -1,7 +1,7 @@
-<!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
+
     <title>銀行代碼查詢系統</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
@@ -10,20 +10,24 @@
             color: #fff;
             font-family: "Segoe UI", "Microsoft JhengHei", sans-serif;
             margin: 0;
-            padding: 40px;
-            display: flex;
-            justify-content: center;
+            padding: 0;
+
+
         }
 
         .table-container {
-            width: 100%;
-            max-width: 800px;
+            width: 90%;
+            max-width: 1000px;
+            min-height: 90vh;
+            margin: 40px auto;
             background: #0a0a0a;
             border: 1px solid #333;
             border-radius: 12px;
-            padding: 20px;
+            padding: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
+
+        
 
         h2 {
             color: #76b900;
@@ -49,7 +53,7 @@
         }
 
         td {
-            padding: 12px 15px;
+            padding: 20px 15px;
             border-bottom: 1px solid #222;
             color: #ccc;
         }
@@ -69,13 +73,16 @@
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #000;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #333;
             border-radius: 10px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #76b900;
         }
@@ -106,12 +113,12 @@
                 dataType: "json",
                 success: function(info) {
                     let total_len = info.length;
-                    for(let i = 0; i < total_len; i++){
+                    for (let i = 0; i < total_len; i++) {
                         $("#row").append(
-                            "<tr>"+
-                            "<td class='idx-col'>"+(i+1)+"</td>"+
-                            "<td>"+info[i].code+"</td>"+
-                            "<td>"+info[i].name+"</td>"+
+                            "<tr>" +
+                            "<td class='idx-col'>" + (i + 1) + "</td>" +
+                            "<td>" + info[i].code + "</td>" +
+                            "<td>" + info[i].name + "</td>" +
                             "</tr>"
                         );
                     }
@@ -122,5 +129,4 @@
             });
         });
     </script>
-</body>
-</html>
+</body></html>
