@@ -2,7 +2,7 @@
 
 <head>
 
-    <title>銀行代碼查詢系統</title>
+    <title>新竹市公有路外停車場資訊</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
         body {
@@ -16,15 +16,16 @@
         }
 
         .table-container {
-            width: 90%;
-            max-width: 1000px;
+            width: 95%;
+            max-width: 1400px;
             min-height: 90vh;
-            margin: 40px auto;
+            margin: 80px auto 40px auto;
             background: #0a0a0a;
             border: 1px solid #333;
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow-x: auto
         }
 
 
@@ -40,7 +41,8 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 15px;
+            font-size: 14px;
+            white-space: nowrap;
         }
 
         th {
@@ -89,35 +91,22 @@
 
         .btn-back {
             position: fixed;
-
             top: 20px;
-
             left: 20px;
-
             z-index: 1000;
-
-
             text-decoration: none;
             color: #76b900;
             font-size: 14px;
             font-weight: bold;
             letter-spacing: 2px;
-
             padding: 10px 20px;
             background-color: rgba(0, 0, 0, 0.7);
-
             border: 1px solid #76b900;
             border-radius: 4px;
-
-
+            backdrop-filter: blur(5px);
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-        }
-
-        .btn-back .symbol {
-            margin-right: 8px;
-            font-size: 12px;
         }
 
         .btn-back:hover {
@@ -125,48 +114,59 @@
             color: #000;
             box-shadow: 0 0 15px rgba(118, 185, 0, 0.5);
             transform: translateX(-5px);
-
         }
-
     </style>
 </head>
-
 <a href="portfolio.html" class="btn-back">
     <span class="symbol">⬅</span> BACK
 </a>
 
 <body>
     <div class="table-container">
-        <h2>Bank Code System</h2>
+        <h2>Hsinchu Parking Availability</h2>
         <table>
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>代碼 (Code)</th>
-                    <th>銀行名稱 (Name)</th>
+                    <th>停車場名稱</th>
+                    <th>地址</th>
+                    <th>營運時間</th>
+                    <th>平日收費方式</th>
+                    <th>假日收費方式</th>
+                    <th>汽車總車數</th>
+                    <th>汽車剩餘車位數</th>
+                    <th>機車總車位數</th>
+                    <th>機車剩餘車位數</th>
+                    <th>緯度</th>
+                    <th>經度</th>
                 </tr>
             </thead>
-            <tbody id="row">
-            </tbody>
+            <tbody id="row"></tbody>
         </table>
     </div>
-    <div class="footer-action">
-        <a href="portfolio.html" class="btn-home">RETURN TO PORTFOLIO</a>
-    </div>
+
     <script>
         $(document).ready(function() {
             $.ajax({
-                url: "https://raw.githubusercontent.com/wsmwason/taiwan-bank-code/master/data/taiwanBankCodeATM.json",
+                url: "https://raw.githubusercontent.com/mineyatom/debug/refs/heads/main/traffic.json",
                 type: "get",
                 dataType: "json",
                 success: function(info) {
                     let total_len = info.length;
                     for (let i = 0; i < total_len; i++) {
+
                         $("#row").append(
                             "<tr>" +
-                            "<td class='idx-col'>" + (i + 1) + "</td>" +
-                            "<td>" + info[i].code + "</td>" +
-                            "<td>" + info[i].name + "</td>" +
+                            "<td>" + info[i].停車場名稱 + "</td>" +
+                            "<td>" + info[i].地址 + "</td>" +
+                            "<td>" + info[i].營運時間 + "</td>" +
+                            "<td>" + info[i].平日收費方式 + "</td>" +
+                            "<td>" + info[i].假日收費方式 + "</td>" +
+                            "<td>" + info[i].汽車總車數 + "</td>" +
+                            "<td>" + info[i].汽車剩餘車位數 + "</td>" +
+                            "<td>" + info[i].機車總車位數 + "</td>" +
+                            "<td>" + info[i].機車剩餘車位數 + "</td>" +
+                            "<td>" + info[i].緯度 + "</td>" +
+                            "<td>" + info[i].經度 + "</td>" +
                             "</tr>"
                         );
                     }
@@ -176,8 +176,5 @@
                 }
             });
         });
-
     </script>
-</body>
-
-</html>
+</body></html>
