@@ -1,0 +1,189 @@
+<html>
+
+<head>
+
+    <title>臺北市運動場館資訊</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: "Segoe UI", "Microsoft JhengHei", sans-serif;
+            margin: 0;
+            padding: 0;
+
+
+        }
+
+        .table-container {
+            width: 90%;
+            max-width: 1400px;
+            min-height: 90vh;
+            margin: 40px auto;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            overflow-x: auto;
+        }
+
+
+
+        h2 {
+            color: #76b900;
+            letter-spacing: 5px;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        th {
+            background-color: #111;
+            color: #76b900;
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid #76b900;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 20px 15px;
+            border-bottom: 1px solid #222;
+            color: #ccc;
+        }
+
+        tr:hover td {
+            color: #fff;
+            background-color: rgba(118, 185, 0, 0.05);
+            transition: 0.3s;
+        }
+
+        .idx-col {
+            color: #76b900;
+            font-weight: bold;
+            width: 60px;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #76b900;
+        }
+
+        .btn-back {
+            position: fixed;
+
+            top: 20px;
+
+            left: 20px;
+
+            z-index: 1000;
+
+
+            text-decoration: none;
+            color: #76b900;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+
+            border: 1px solid #76b900;
+            border-radius: 4px;
+            backdrop-filter: blur(5px);
+
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-back .symbol {
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        .btn-back:hover {
+            background-color: #76b900;
+            color: #000;
+            box-shadow: 0 0 15px rgba(118, 185, 0, 0.5);
+            transform: translateX(-5px);
+
+        }
+    </style>
+</head>
+<a href="portfolio.html" class="btn-back">
+    <span class="symbol">⬅</span> BACK
+</a>
+
+<body>
+    <div class="table-container">
+        <h2>Taipei Sports Venues Registry</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>行政區</th>
+                    <th>地點</th>
+                    <th>地點英文名</th>
+                    <th>項目</th>
+                    <th>地址</th>
+                    <th>英文地址</th>
+                    <th>開始時間</th>
+                    <th>結束時間</th>
+                    <th>電話</th>
+                </tr>
+            </thead>
+            <tbody id="row"></tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "https://raw.githubusercontent.com/mineyatom/debug/refs/heads/main/venues.json",
+                type: "get",
+                dataType: "json",
+                success: function(info) {
+                    let total_len = info.length;
+                    for (let i = 0; i < total_len; i++) {
+
+                        $("#row").append(
+                            "<tr>" +
+                            "<td>" + info[i].Area + "</td>" +
+                            "<td>" + info[i].Name+ "</td>" +
+                            "<td>" + info[i].NameEng + "</td>" +
+                            "<td>" + info[i].SportType + "</td>" +
+                            "<td>" + info[i].Address + "</td>" +
+                            "<td>" + info[i].AddressEng + "</td>" +
+                            "<td>" + info[i].startTime+ "</td>" +
+                            "<td>" + info[i].endTime + "</td>" +
+                            "<td>" + info[i].LocalCallService + "</td>" +
+                            "</tr>"
+                        );
+                    }
+                },
+                error: function() {
+                    console.log("error");
+                }
+            });
+        });
+    </script>
+</body></html>
